@@ -20,22 +20,11 @@
       }
     }
   </script>
-
-  <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #0f172a; }
-    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
-    .glass-card {
-      background: rgba(19, 29, 49, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(99, 102, 241, 0.2);
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="h-full flex overflow-hidden antialiased font-sans bg-slate-900">
 
-  <!-- ==================== 1. AUTHENTICATION / LOGIN SCREEN ==================== -->
+  <!-- ==================== 1. AUTHENTICATION SCREEN ==================== -->
   <div id="auth-page" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/40 via-slate-900 to-slate-950 overflow-y-auto">
     <div class="w-full max-w-md glass-card rounded-3xl p-8 shadow-2xl space-y-6 relative">
       
@@ -46,9 +35,9 @@
         <p class="text-xs text-slate-400">Your AI-Powered Career & Skill Mentor</p>
       </div>
 
-      <!-- Role Selection Buttons -->
+      <!-- Role Selection -->
       <div>
-        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 text-center">Select Your Account Type</label>
+        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 text-center">Select Account Type</label>
         <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-800/80 rounded-xl text-xs font-medium text-slate-300 border border-slate-700/50">
           <button type="button" id="role-btn-student" onclick="selectRole('student')" class="py-2 rounded-lg bg-indigo-600 text-white font-semibold shadow-md transition-all">Student</button>
           <button type="button" id="role-btn-educator" onclick="selectRole('educator')" class="py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 transition-all">Educator</button>
@@ -56,7 +45,7 @@
         </div>
       </div>
 
-      <!-- Google Social Login Button -->
+      <!-- Google Social Login -->
       <div class="space-y-2">
         <button type="button" onclick="loginWithGoogle()" class="w-full flex items-center justify-center gap-3 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700/80 text-xs font-semibold text-slate-200 hover:text-white transition-all shadow-sm active:scale-95 cursor-pointer">
           <svg class="w-4 h-4" viewBox="0 0 24 24">
@@ -74,13 +63,13 @@
         <span class="bg-slate-850 px-3 text-[10px] uppercase font-bold text-slate-500 tracking-wider absolute">Or Email</span>
       </div>
 
-      <!-- Auth Tabs (Sign In vs Create Account) -->
+      <!-- Auth Tabs -->
       <div class="flex border-b border-slate-700/60 text-xs font-semibold">
         <button type="button" id="tab-login" onclick="switchAuthTab('login')" class="flex-1 py-2 text-indigo-400 border-b-2 border-indigo-500 text-center font-bold">Sign In</button>
         <button type="button" id="tab-signup" onclick="switchAuthTab('signup')" class="flex-1 py-2 text-slate-400 hover:text-slate-200 text-center">Create Account</button>
       </div>
 
-      <!-- Main Form -->
+      <!-- Form -->
       <form onsubmit="handleFormSubmit(event)" class="space-y-3">
         <div id="field-fullname" class="hidden">
           <label class="block text-xs font-medium text-slate-300 mb-1">Full Name</label>
@@ -105,8 +94,10 @@
     </div>
   </div>
 
-  <!-- ==================== 2. MAIN APPLICATION DASHBOARD ==================== -->
+  <!-- ==================== 2. MAIN DASHBOARD ==================== -->
   <div id="app-dashboard" class="h-full flex w-full overflow-hidden hidden">
+    
+    <!-- Sidebar -->
     <aside class="w-64 bg-slate-850 border-r border-slate-700/50 flex flex-col justify-between shrink-0">
       <div>
         <div class="h-16 flex items-center px-6 border-b border-slate-700/50 gap-3">
@@ -115,24 +106,19 @@
         </div>
         
         <nav class="p-4 space-y-1 text-xs">
-          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-indigo-400 bg-indigo-500/10 border border-indigo-500/20" onclick="switchNav('Dashboard Overview', this)">
+          <button type="button" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-indigo-400 bg-indigo-500/10 border border-indigo-500/20" onclick="switchTab('dashboard-view', 'Dashboard Overview', this)">
             <span>📊</span> Dashboard
           </button>
-          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchNav('Skill Assessment Matrix', this)">
-            <span>🎯</span> Skill Assessment
-          </button>
-          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchNav('Personalized Roadmap', this)">
+          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('roadmap-view', 'Personalized Roadmap', this)">
             <span>🗺️</span> My Roadmap
           </button>
-          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchNav('ATS Resume Analyzer', this)">
+          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('resume-view', 'ATS Resume Analyzer', this)">
             <span>📄</span> Resume Analyzer
-          </button>
-          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchNav('AI Mock Interview Studio', this)">
-            <span>🎙️</span> AI Mock Interview
           </button>
         </nav>
       </div>
 
+      <!-- User Profile Card -->
       <div class="p-4 border-t border-slate-700/50 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div id="user-avatar" class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center font-bold text-white text-xs">P</div>
@@ -145,7 +131,10 @@
       </div>
     </aside>
 
+    <!-- Main Workspace -->
     <main class="flex-1 flex flex-col h-full overflow-hidden bg-slate-900">
+      
+      <!-- Top Header -->
       <header class="h-16 border-b border-slate-700/50 px-8 flex items-center justify-between shrink-0 bg-slate-850/50 backdrop-blur-md">
         <h2 id="view-title" class="text-sm font-semibold text-slate-200">Dashboard Overview</h2>
         <div class="flex items-center gap-4 text-xs">
@@ -154,167 +143,162 @@
         </div>
       </header>
       
+      <!-- Content Container -->
       <div class="flex-1 overflow-y-auto p-8 space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div class="glass-card p-5 rounded-2xl space-y-1">
-            <p class="text-xs text-slate-400">Overall Readiness</p>
-            <p class="text-2xl font-extrabold text-indigo-400">78%</p>
+
+        <!-- VIEW 1: DASHBOARD OVERVIEW -->
+        <div id="dashboard-view" class="tab-content space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="glass-card p-5 rounded-2xl space-y-1">
+              <p class="text-xs text-slate-400">Overall Readiness</p>
+              <p id="stat-readiness" class="text-2xl font-extrabold text-indigo-400">60%</p>
+            </div>
+            <div class="glass-card p-5 rounded-2xl space-y-1">
+              <p class="text-xs text-slate-400">ATS Resume Score</p>
+              <p id="stat-ats-score" class="text-2xl font-extrabold text-emerald-400">-- / 100</p>
+            </div>
+            <div class="glass-card p-5 rounded-2xl space-y-1">
+              <p class="text-xs text-slate-400">Target Role Match</p>
+              <p class="text-2xl font-extrabold text-purple-400">88%</p>
+            </div>
+            <div class="glass-card p-5 rounded-2xl space-y-1">
+              <p class="text-xs text-slate-400">Completed Modules</p>
+              <p id="stat-completed-count" class="text-2xl font-extrabold text-amber-400">3 / 5</p>
+            </div>
           </div>
-          <div class="glass-card p-5 rounded-2xl space-y-1">
-            <p class="text-xs text-slate-400">ATS Resume Score</p>
-            <p class="text-2xl font-extrabold text-emerald-400">84 / 100</p>
-          </div>
-          <div class="glass-card p-5 rounded-2xl space-y-1">
-            <p class="text-xs text-slate-400">Target Role Match</p>
-            <p class="text-2xl font-extrabold text-purple-400">92%</p>
-          </div>
-          <div class="glass-card p-5 rounded-2xl space-y-1">
-            <p class="text-xs text-slate-400">Completed Modules</p>
-            <p class="text-2xl font-extrabold text-amber-400">12 / 16</p>
+
+          <div class="glass-card p-6 rounded-2xl space-y-4 border border-emerald-500/30">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>🤖</span> AI Mentor Recommendation
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Welcome back! You are logged in as a <span id="dashboard-role-text" class="text-indigo-400 font-semibold">Student</span>. Try the new <strong class="text-white">ATS Resume Analyzer</strong> tab or complete your remaining <strong class="text-white">Roadmap Modules</strong> to boost your overall readiness score!
+            </p>
           </div>
         </div>
 
-        <div class="glass-card p-6 rounded-2xl space-y-4 border border-emerald-500/30">
-          <h3 class="text-sm font-bold text-white flex items-center gap-2">
-            <span>✅</span> Supabase Integration Status
-          </h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Connected to Supabase endpoint! Active account role: <span id="dashboard-role-text" class="text-indigo-400 font-semibold">Student</span>.
-          </p>
+        <!-- VIEW 2: ROADMAP TRACKER -->
+        <div id="roadmap-view" class="tab-content space-y-6 hidden">
+          <div class="glass-card p-6 rounded-2xl space-y-4">
+            <div class="flex justify-between items-center">
+              <div>
+                <h3 class="text-sm font-bold text-white">Full-Stack AI Developer Roadmap</h3>
+                <p class="text-xs text-slate-400">Check off modules as you master skills to update your readiness score.</p>
+              </div>
+              <span id="roadmap-progress-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">Progress: 60%</span>
+            </div>
+
+            <div class="space-y-3 pt-2">
+              <label class="flex items-center gap-3 p-3 bg-slate-800/60 rounded-xl cursor-pointer border border-slate-700/50 hover:bg-slate-800">
+                <input type="checkbox" checked onchange="updateRoadmapProgress()" class="roadmap-checkbox w-4 h-4 accent-indigo-500 rounded">
+                <div>
+                  <p class="text-xs font-semibold text-white">1. HTML5, CSS3 & Modern Tailwind UI</p>
+                  <p class="text-[10px] text-slate-400">Responsive layouts, glassmorphism, and Flexbox/Grid</p>
+                </div>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 bg-slate-800/60 rounded-xl cursor-pointer border border-slate-700/50 hover:bg-slate-800">
+                <input type="checkbox" checked onchange="updateRoadmapProgress()" class="roadmap-checkbox w-4 h-4 accent-indigo-500 rounded">
+                <div>
+                  <p class="text-xs font-semibold text-white">2. JavaScript ES6+ & Event Handling</p>
+                  <p class="text-[10px] text-slate-400">DOM manipulation, async/await, and event prevention</p>
+                </div>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 bg-slate-800/60 rounded-xl cursor-pointer border border-slate-700/50 hover:bg-slate-800">
+                <input type="checkbox" checked onchange="updateRoadmapProgress()" class="roadmap-checkbox w-4 h-4 accent-indigo-500 rounded">
+                <div>
+                  <p class="text-xs font-semibold text-white">3. Supabase Auth & PostgreSQL Integration</p>
+                  <p class="text-[10px] text-slate-400">User signups, session management, and RLS database policies</p>
+                </div>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 bg-slate-800/60 rounded-xl cursor-pointer border border-slate-700/50 hover:bg-slate-800">
+                <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-checkbox w-4 h-4 accent-indigo-500 rounded">
+                <div>
+                  <p class="text-xs font-semibold text-white">4. System Design & REST API Architecture</p>
+                  <p class="text-[10px] text-slate-400">Scalable data modeling, endpoints, and microservices</p>
+                </div>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 bg-slate-800/60 rounded-xl cursor-pointer border border-slate-700/50 hover:bg-slate-800">
+                <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-checkbox w-4 h-4 accent-indigo-500 rounded">
+                <div>
+                  <p class="text-xs font-semibold text-white">5. AI Model Integration & Vector Embeddings</p>
+                  <p class="text-[10px] text-slate-400">Connecting LLM APIs for automated ATS resume scoring</p>
+                </div>
+              </label>
+            </div>
+          </div>
         </div>
+
+        <!-- VIEW 3: LIVE ATS RESUME ANALYZER -->
+        <div id="resume-view" class="tab-content space-y-6 hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Inputs -->
+            <div class="glass-card p-6 rounded-2xl space-y-4">
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>📄</span> Paste Resume Text
+              </h3>
+              
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Target Job Description</label>
+                <input type="text" id="target-job-title" value="Full-Stack Developer (HTML, CSS, JavaScript, React, Node.js, Python, PostgreSQL, Supabase, Git)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white outline-none">
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Resume Content / Paste Resume</label>
+                <textarea id="resume-text-input" rows="8" placeholder="Paste your resume content here (e.g. Skills: HTML, CSS, JavaScript, Tailwind, Supabase...)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white outline-none font-mono"></textarea>
+              </div>
+
+              <button type="button" onclick="analyzeResume()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 font-semibold text-xs text-white rounded-xl shadow-lg shadow-indigo-600/30 transition-all cursor-pointer">
+                Run ATS Resume Analysis ⚡
+              </button>
+            </div>
+
+            <!-- Analysis Output -->
+            <div class="glass-card p-6 rounded-2xl space-y-4">
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>📊</span> ATS Analysis Results
+              </h3>
+
+              <div id="ats-results-placeholder" class="text-center py-12 text-slate-500 text-xs">
+                Paste your resume text on the left and click "Run Analysis" to calculate your score.
+              </div>
+
+              <div id="ats-results-content" class="space-y-4 hidden">
+                <div class="flex items-center justify-between p-4 bg-slate-800/80 rounded-xl border border-slate-700/60">
+                  <span class="text-xs text-slate-300">Overall Match Score</span>
+                  <span id="ats-score-display" class="text-3xl font-extrabold text-emerald-400">0%</span>
+                </div>
+
+                <div>
+                  <p class="text-xs font-semibold text-emerald-400 mb-2">✅ Matched Keywords Found</p>
+                  <div id="matched-keywords-container" class="flex flex-wrap gap-1.5"></div>
+                </div>
+
+                <div>
+                  <p class="text-xs font-semibold text-rose-400 mb-2">⚠️ Missing Job Keywords</p>
+                  <div id="missing-keywords-container" class="flex flex-wrap gap-1.5"></div>
+                </div>
+
+                <div class="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl text-xs text-indigo-300">
+                  <strong class="block text-indigo-400 font-semibold mb-1">💡 Improvement Tip:</strong>
+                  <span id="ats-recommendation-text">Add the missing keywords into your resume skills section to increase ATS visibility.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
 
-  <!-- Supabase Official JS SDK -->
+  <!-- Supabase JS Library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script>
-    // 1. Supabase Initialization
-    const SUPABASE_URL = "https://vgazgftegixbqzoqwegt.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_YdfM6Ft3oYHCgpRxn1kjWA_PQCCFqpD";
-    
-    let supabaseClient = null;
-    if (window.supabase) {
-      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    }
-
-    let activeRole = 'student';
-    let activeMode = 'login';
-
-    function selectRole(role) {
-      activeRole = role;
-      ['student', 'educator', 'recruiter'].forEach(r => {
-        const btn = document.getElementById(`role-btn-${r}`);
-        if (btn) {
-          btn.className = (r === role)
-            ? "py-2 rounded-lg bg-indigo-600 text-white font-semibold shadow-md transition-all"
-            : "py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 transition-all";
-        }
-      });
-    }
-
-    function switchAuthTab(mode) {
-      activeMode = mode;
-      const loginTab = document.getElementById('tab-login');
-      const signupTab = document.getElementById('tab-signup');
-      const nameField = document.getElementById('field-fullname');
-      const btnText = document.getElementById('btn-text');
-
-      if (mode === 'signup') {
-        signupTab.className = "flex-1 py-2 text-indigo-400 border-b-2 border-indigo-500 text-center font-bold";
-        loginTab.className = "flex-1 py-2 text-slate-400 hover:text-slate-200 text-center";
-        nameField.classList.remove('hidden');
-        btnText.innerText = "Create Account & Continue";
-      } else {
-        loginTab.className = "flex-1 py-2 text-indigo-400 border-b-2 border-indigo-500 text-center font-bold";
-        signupTab.className = "flex-1 py-2 text-slate-400 hover:text-slate-200 text-center";
-        nameField.classList.add('hidden');
-        btnText.innerText = "Sign In to Dashboard";
-      }
-    }
-
-    async function handleFormSubmit(event) {
-      event.preventDefault(); // STOPS PAGE RELOAD BUG
-
-      const email = document.getElementById('input-email').value.trim();
-      const password = document.getElementById('input-password').value;
-      const nameInput = document.getElementById('input-name').value.trim();
-      const fullName = nameInput || email.split('@')[0];
-      const btnText = document.getElementById('btn-text');
-
-      btnText.innerText = "Processing...";
-
-      try {
-        if (activeMode === 'signup') {
-          if (supabaseClient) {
-            const { data, error } = await supabaseClient.auth.signUp({
-              email: email,
-              password: password,
-              options: { data: { full_name: fullName, role: activeRole } }
-            });
-            if (error) throw error;
-            alert("🎉 Success! Account created in Supabase.");
-          }
-        } else {
-          if (supabaseClient) {
-            const { data, error } = await supabaseClient.auth.signInWithPassword({
-              email: email,
-              password: password
-            });
-            if (error) throw error;
-          }
-        }
-        openDashboard(fullName, activeRole);
-      } catch (err) {
-        alert("⚠️ Authentication Note: " + err.message);
-        // Fallback transition so UI testing is unblocked locally
-        openDashboard(fullName, activeRole);
-      } finally {
-        btnText.innerText = activeMode === 'signup' ? "Create Account & Continue" : "Sign In to Dashboard";
-      }
-    }
-
-    async function loginWithGoogle() {
-      if (supabaseClient) {
-        try {
-          const { error } = await supabaseClient.auth.signInWithOAuth({
-            provider: 'google',
-            options: { redirectTo: window.location.href }
-          });
-          if (error) throw error;
-        } catch (err) {
-          alert("Google OAuth setup required in Supabase console: " + err.message);
-          openDashboard("Google User", activeRole);
-        }
-      } else {
-        openDashboard("Google User", activeRole);
-      }
-    }
-
-    function openDashboard(userName, role) {
-      document.getElementById('user-display-name').innerText = userName;
-      document.getElementById('user-avatar').innerText = userName.charAt(0).toUpperCase();
-      document.getElementById('user-role-badge').innerText = role.charAt(0).toUpperCase() + role.slice(1) + " Account";
-      document.getElementById('dashboard-role-text').innerText = role.charAt(0).toUpperCase() + role.slice(1);
-
-      document.getElementById('auth-page').classList.add('hidden');
-      document.getElementById('app-dashboard').classList.remove('hidden');
-    }
-
-    function handleLogout() {
-      if (supabaseClient) supabaseClient.auth.signOut();
-      document.getElementById('app-dashboard').classList.add('hidden');
-      document.getElementById('auth-page').classList.remove('hidden');
-    }
-
-    function switchNav(title, element) {
-      document.querySelectorAll('.nav-item').forEach(btn => {
-        btn.className = "nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800";
-      });
-      element.className = "nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-indigo-400 bg-indigo-500/10 border border-indigo-500/20";
-      document.getElementById('view-title').innerText = title;
-    }
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
