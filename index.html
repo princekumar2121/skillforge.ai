@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkillForge AI - Autonomous Career & Hiring Engine</title>
+  <title>SkillForge AI - Multi-Portal Platform</title>
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -43,7 +42,7 @@
       </h1>
       
       <p class="text-sm md:text-base text-slate-400 font-medium leading-relaxed">
-        Autonomous AI Career Acceleration, 50+ Detailed Roadmaps, Working Voice Mock Interviews & Role-Based Portals.
+        Autonomous Career Acceleration for Students, Course Management for Educators, & Hiring Engines for Recruiters.
       </p>
 
       <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -64,12 +63,12 @@
       <div class="text-center space-y-2">
         <div class="inline-flex h-12 w-12 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-500 items-center justify-center text-xl font-bold text-white shadow-lg">⚡</div>
         <h2 class="text-2xl font-extrabold text-white">SkillForge AI Access</h2>
-        <p class="text-xs text-slate-400">Select your workspace portal mode</p>
+        <p class="text-xs text-slate-400">Select your role to load custom tools</p>
       </div>
 
       <!-- Role Selector -->
       <div>
-        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 text-center">Select Portal Role</label>
+        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 text-center">Select Workspace Role</label>
         <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-800/80 rounded-xl text-xs font-medium text-slate-300 border border-slate-700/50">
           <button type="button" id="role-btn-student" onclick="selectRole('student')" class="py-2 rounded-lg bg-indigo-600 text-white font-semibold">Student</button>
           <button type="button" id="role-btn-educator" onclick="selectRole('educator')" class="py-2 rounded-lg text-slate-400 hover:text-white">Educator</button>
@@ -115,7 +114,7 @@
   <!-- ==================== 3. MAIN DASHBOARD ==================== -->
   <div id="app-dashboard" class="h-full flex w-full overflow-hidden hidden">
     
-    <!-- Sidebar -->
+    <!-- Dynamic Sidebar -->
     <aside class="w-64 bg-slate-850 border-r border-slate-700/50 flex flex-col justify-between shrink-0">
       <div>
         <div class="h-16 flex items-center px-6 border-b border-slate-700/50 gap-3">
@@ -123,29 +122,42 @@
           <span class="font-extrabold text-lg tracking-tight text-white">SkillForge AI</span>
         </div>
         
-        <nav class="p-4 space-y-1 text-xs">
-          <button type="button" id="nav-btn-dashboard" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-indigo-400 bg-indigo-500/10 border border-indigo-500/20" onclick="switchTab('dashboard-view', 'Dashboard Overview', this)">
+        <!-- STUDENT NAVIGATION -->
+        <nav id="nav-group-student" class="p-4 space-y-1 text-xs">
+          <button type="button" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-indigo-400 bg-indigo-500/10 border border-indigo-500/20" onclick="switchTab('dashboard-view', 'Student Dashboard', this)">
             <span>📊</span> Dashboard
           </button>
-          <button type="button" id="nav-btn-roadmaps" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('roadmaps-hub-view', '50+ Career Roadmaps Hub', this)">
+          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('roadmaps-hub-view', '50+ Career Roadmaps Hub', this)">
             <span>🗺️</span> 50+ Career Hub
           </button>
-          <button type="button" id="nav-btn-jobs" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('job-board-view', 'Real-Time Job Match Engine', this)">
-            <span>💼</span> Real-Time Job Match
+          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('job-board-view', 'Real-Time Job Match Engine', this)">
+            <span>💼</span> Real-Time Jobs
           </button>
-          <button type="button" id="nav-btn-resume" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('resume-view', 'ATS PDF Resume Analyzer', this)">
+          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('resume-view', 'ATS PDF Resume Analyzer', this)">
             <span>📄</span> PDF Resume Analyzer
           </button>
-          <button type="button" id="nav-btn-interview" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('interview-view', 'AI Voice Mock Interview', this)">
+          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('interview-view', 'AI Voice Mock Interview', this)">
             <span>🎙️</span> AI Mock Interview
           </button>
-          
-          <!-- Role Specific Navigation Buttons -->
-          <button type="button" id="nav-btn-educator" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20 hidden" onclick="switchTab('educator-view', 'Educator Class Analytics', this)">
+        </nav>
+
+        <!-- EDUCATOR NAVIGATION -->
+        <nav id="nav-group-educator" class="p-4 space-y-1 text-xs hidden">
+          <button type="button" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20" onclick="switchTab('educator-view', 'Educator Class Analytics', this)">
             <span>🎓</span> Class Analytics
           </button>
-          <button type="button" id="nav-btn-recruiter" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 hidden" onclick="switchTab('recruiter-view', 'Recruiter Talent Pipeline', this)">
+          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('educator-courses-view', 'Course Management', this)">
+            <span>📚</span> Course Management
+          </button>
+        </nav>
+
+        <!-- RECRUITER NAVIGATION -->
+        <nav id="nav-group-recruiter" class="p-4 space-y-1 text-xs hidden">
+          <button type="button" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20" onclick="switchTab('recruiter-view', 'Recruiter Talent Pipeline', this)">
             <span>🎯</span> Talent Pipeline
+          </button>
+          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('recruiter-jobs-view', 'Job Postings Management', this)">
+            <span>➕</span> Post & Manage Jobs
           </button>
         </nav>
       </div>
@@ -168,18 +180,18 @@
     <!-- Main Workspace -->
     <main class="flex-1 flex flex-col h-full overflow-hidden bg-slate-900">
       
-      <!-- Top Header -->
+      <!-- Header -->
       <header class="h-16 border-b border-slate-700/50 px-8 flex items-center justify-between shrink-0 bg-slate-850/50 backdrop-blur-md">
-        <h2 id="view-title" class="text-sm font-semibold text-slate-200">Dashboard Overview</h2>
+        <h2 id="view-title" class="text-sm font-semibold text-slate-200">Student Dashboard</h2>
         <div class="flex items-center gap-4 text-xs">
-          <span class="px-3 py-1 rounded-full font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">🔥 14 Day Active Streak</span>
+          <span id="header-badge" class="px-3 py-1 rounded-full font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">🔥 Active Account</span>
           <button type="button" onclick="handleLogout()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300">Sign Out</button>
         </div>
       </header>
       
       <div class="flex-1 overflow-y-auto p-8 space-y-6">
 
-        <!-- VIEW 1: DASHBOARD OVERVIEW -->
+        <!-- VIEW 1: STUDENT DASHBOARD OVERVIEW -->
         <div id="dashboard-view" class="tab-content space-y-6">
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="glass-card p-5 rounded-2xl space-y-1">
@@ -201,30 +213,28 @@
           </div>
 
           <div class="glass-card p-6 rounded-2xl border border-indigo-500/30 space-y-2">
-            <h3 class="text-sm font-bold text-white">⚡ Welcome to SkillForge AI Portal</h3>
+            <h3 class="text-sm font-bold text-white">⚡ Student Learning Portal</h3>
             <p class="text-xs text-slate-300 leading-relaxed">
-              You are logged in as <span id="dashboard-role-text" class="text-indigo-400 font-semibold">Student</span>. Use the sidebar to explore 50+ Career Roadmaps, practice live Voice Interviews, analyze PDF Resumes, or search matched jobs.
+              Explore 50+ Career Roadmaps, practice live Voice AI Interviews, or parse your PDF resume against job requirement matrices.
             </p>
           </div>
         </div>
 
         <!-- VIEW 2: 50+ CAREER ROADMAPS HUB -->
         <div id="roadmaps-hub-view" class="tab-content space-y-6 hidden">
-          
-          <!-- HUB MAIN LIST -->
           <div id="roadmap-hub-main" class="space-y-6">
             <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
               <div>
                 <h3 class="text-sm font-bold text-white">50+ Career Development Roadmaps</h3>
-                <p class="text-xs text-slate-400">Select any career to reveal full step-by-step milestones, modules, and learning paths.</p>
+                <p class="text-xs text-slate-400">Select any career to reveal step-by-step milestones, modules, and learning paths.</p>
               </div>
-              <input type="text" id="roadmap-search-input" onkeyup="filterRoadmaps()" placeholder="Search 50+ careers (e.g. AI, Cloud, DevOps, Blockchain...)" class="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white outline-none w-full md:w-80">
+              <input type="text" id="roadmap-search-input" onkeyup="filterRoadmaps()" placeholder="Search 50+ careers..." class="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white outline-none w-full md:w-80">
             </div>
 
             <div id="roadmaps-grid-container" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
           </div>
 
-          <!-- DETAILED ROADMAP OVERLAY VIEW -->
+          <!-- DETAILED ROADMAP OVERLAY -->
           <div id="roadmap-detailed-overlay" class="space-y-6 hidden">
             <button type="button" onclick="closeDetailedRoadmap()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold flex items-center gap-2 cursor-pointer">
               ← Back to All 50 Careers
@@ -237,15 +247,13 @@
                   <h2 id="detailed-roadmap-title" class="text-lg font-extrabold text-white mt-1">Career Title</h2>
                 </div>
                 <div class="text-xs text-slate-400">
-                  <span>Estimated Completion: </span><strong id="detailed-roadmap-time" class="text-emerald-400">6 Months</strong>
+                  <span>Estimated Time: </span><strong id="detailed-roadmap-time" class="text-emerald-400">6 Months</strong>
                 </div>
               </div>
 
-              <!-- Roadmap Phases Breakdown -->
               <div id="detailed-roadmap-phases" class="space-y-6"></div>
             </div>
           </div>
-
         </div>
 
         <!-- VIEW 3: REAL-TIME JOB MATCH ENGINE -->
@@ -254,19 +262,18 @@
             <div class="flex justify-between items-center">
               <div>
                 <h3 class="text-sm font-bold text-white">Real-Time Job Match Engine</h3>
-                <p class="text-xs text-slate-400">Positions dynamically scored based on your selected target requirements and ATS analysis.</p>
+                <p class="text-xs text-slate-400">Positions dynamically scored based on your resume ATS match.</p>
               </div>
-              <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">12 Direct Matches</span>
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Live Jobs Feed</span>
             </div>
 
             <div id="jobs-container-list" class="space-y-3"></div>
           </div>
         </div>
 
-        <!-- VIEW 4: ATS PDF RESUME ANALYZER (MULTI-SELECT REQUIREMENTS) -->
+        <!-- VIEW 4: ATS PDF RESUME ANALYZER -->
         <div id="resume-view" class="tab-content space-y-6 hidden">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
             <div class="glass-card p-6 rounded-2xl space-y-4">
               <h3 class="text-sm font-bold text-white">📄 PDF Resume Drag & Drop Upload</h3>
               
@@ -277,9 +284,8 @@
                 <input type="file" id="pdf-file-input" accept=".pdf" onchange="handlePDFUpload(event)" class="hidden">
               </div>
 
-              <!-- REAL MULTI-SELECT TARGET JOB REQUIREMENTS -->
               <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-2">Select Target Job Skill Requirements (Multi-Select):</label>
+                <label class="block text-xs font-semibold text-slate-300 mb-2">Select Target Job Skill Requirements:</label>
                 <div id="multi-skill-selector" class="grid grid-cols-3 gap-2 p-3 bg-slate-800/80 rounded-xl border border-slate-700 max-h-36 overflow-y-auto">
                   <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="html" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> HTML5</label>
                   <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="css" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> CSS3</label>
@@ -290,9 +296,6 @@
                   <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="postgresql" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> PostgreSQL</label>
                   <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="supabase" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> Supabase</label>
                   <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="git" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> Git</label>
-                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="tailwind" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> Tailwind CSS</label>
-                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="docker" onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> Docker</label>
-                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="aws" onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> AWS Cloud</label>
                 </div>
               </div>
 
@@ -306,7 +309,6 @@
               </button>
             </div>
 
-            <!-- Output -->
             <div class="glass-card p-6 rounded-2xl space-y-4">
               <h3 class="text-sm font-bold text-white">📊 ATS Analysis Score</h3>
               <div id="ats-results-placeholder" class="text-center py-12 text-slate-500 text-xs">
@@ -314,30 +316,29 @@
               </div>
               <div id="ats-results-content" class="space-y-4 hidden">
                 <div class="flex items-center justify-between p-4 bg-slate-800/80 rounded-xl border border-slate-700">
-                  <span class="text-xs text-slate-300">Selected Requirements Match</span>
+                  <span class="text-xs text-slate-300">Requirement Match Score</span>
                   <span id="ats-score-display" class="text-3xl font-extrabold text-emerald-400">0%</span>
                 </div>
                 <div>
-                  <p class="text-xs font-semibold text-emerald-400 mb-2">✅ Matched Requirements Found</p>
+                  <p class="text-xs font-semibold text-emerald-400 mb-2">✅ Matched Requirements</p>
                   <div id="matched-keywords-container" class="flex flex-wrap gap-1.5"></div>
                 </div>
                 <div>
-                  <p class="text-xs font-semibold text-rose-400 mb-2">⚠️ Missing Selected Requirements</p>
+                  <p class="text-xs font-semibold text-rose-400 mb-2">⚠️ Missing Requirements</p>
                   <div id="missing-keywords-container" class="flex flex-wrap gap-1.5"></div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
-        <!-- VIEW 5: WORKING AI VOICE MOCK INTERVIEW -->
+        <!-- VIEW 5: AI VOICE MOCK INTERVIEW -->
         <div id="interview-view" class="tab-content space-y-6 hidden">
           <div class="glass-card p-6 rounded-2xl space-y-6">
             <div class="flex justify-between items-center border-b border-slate-800 pb-4">
               <div>
                 <h3 class="text-sm font-bold text-white">🎙️ Live Voice Speech AI Mock Interviewer</h3>
-                <p class="text-xs text-slate-400">Uses native Speech Recognition to transcribe your voice live and score technical accuracy.</p>
+                <p class="text-xs text-slate-400">Uses Speech Recognition to transcribe your voice live and score accuracy.</p>
               </div>
               <span id="speech-status-indicator" class="px-3 py-1 rounded-full text-[10px] font-bold bg-slate-800 text-slate-400 border border-slate-700">MIC READY</span>
             </div>
@@ -382,56 +383,110 @@
           </div>
         </div>
 
-        <!-- VIEW 6: REAL WORKING EDUCATOR PORTAL VIEW -->
+        <!-- VIEW 6: EDUCATOR CLASS ANALYTICS -->
         <div id="educator-view" class="tab-content space-y-6 hidden">
-          <div class="glass-card p-6 rounded-2xl space-y-6">
+          <div class="glass-card p-6 rounded-2xl space-y-6 border border-amber-500/30">
             <div class="flex justify-between items-center border-b border-slate-800 pb-4">
               <div>
-                <h3 class="text-sm font-bold text-amber-400 flex items-center gap-2"><span>🎓</span> Educator Management Portal</h3>
-                <p class="text-xs text-slate-400">Monitor student progress, assigned skill roadmaps, and average ATS readiness.</p>
+                <h3 class="text-sm font-bold text-amber-400 flex items-center gap-2"><span>🎓</span> Educator Analytics & Student Progress</h3>
+                <p class="text-xs text-slate-400">Class readiness benchmarks, enrolled students, and mock interview stats.</p>
               </div>
-              <button onclick="executeBroadcastToastNotification('Broadcasting assignment to all students!')" class="px-3 py-1.5 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-xl text-xs font-semibold hover:bg-amber-500/20">Assign Module Batch</button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1">
-                <p class="text-[10px] text-slate-400 uppercase font-bold">Total Enrolled Students</p>
-                <p class="text-xl font-black text-white">42 Active</p>
+                <p class="text-[10px] text-slate-400 uppercase font-bold">Enrolled Students</p>
+                <p class="text-2xl font-black text-white">42 Enrolled</p>
               </div>
               <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1">
-                <p class="text-[10px] text-slate-400 uppercase font-bold">Class Average Readiness</p>
-                <p class="text-xl font-black text-emerald-400">81.4%</p>
+                <p class="text-[10px] text-slate-400 uppercase font-bold">Average Class Readiness</p>
+                <p class="text-2xl font-black text-emerald-400">82.5%</p>
               </div>
               <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1">
                 <p class="text-[10px] text-slate-400 uppercase font-bold">Mock Interviews Completed</p>
-                <p class="text-xl font-black text-indigo-400">128 Voice Tests</p>
+                <p class="text-2xl font-black text-indigo-400">128 Voice Tests</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- VIEW 7: REAL WORKING RECRUITER PORTAL VIEW -->
+        <!-- VIEW 7: EDUCATOR COURSE CREATOR WORKSPACE -->
+        <div id="educator-courses-view" class="tab-content space-y-6 hidden">
+          <div class="glass-card p-6 rounded-2xl space-y-6 border border-amber-500/30">
+            <h3 class="text-sm font-bold text-amber-400">📚 Add & Manage Courses</h3>
+            
+            <form onsubmit="createNewCourse(event)" class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs text-slate-300 mb-1">Course Title</label>
+                  <input type="text" id="course-title-input" required placeholder="e.g. Advanced System Design & Cloud DBs" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs text-slate-300 mb-1">Target Skill Category</label>
+                  <input type="text" id="course-category-input" required placeholder="e.g. Backend Engineering" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white outline-none">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">Curriculum Outline / Modules</label>
+                <textarea id="course-modules-input" rows="3" required placeholder="Module 1: Database Locks, Module 2: Supabase Auth..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white outline-none"></textarea>
+              </div>
+
+              <button type="submit" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-semibold shadow-md cursor-pointer">
+                Publish New Course →
+              </button>
+            </form>
+
+            <div class="pt-4 border-t border-slate-800 space-y-3">
+              <h4 class="text-xs font-bold text-white">Active Educator Courses</h4>
+              <div id="educator-course-list" class="space-y-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 8: RECRUITER TALENT PIPELINE VIEW -->
         <div id="recruiter-view" class="tab-content space-y-6 hidden">
-          <div class="glass-card p-6 rounded-2xl space-y-6">
+          <div class="glass-card p-6 rounded-2xl space-y-6 border border-emerald-500/30">
             <div class="flex justify-between items-center border-b border-slate-800 pb-4">
               <div>
-                <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2"><span>🎯</span> Recruiter Candidate Pipeline</h3>
-                <p class="text-xs text-slate-400">Directly contact candidates with high ATS resume scores and verified skill badges.</p>
+                <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2"><span>🎯</span> Verified Candidate Talent Pipeline</h3>
+                <p class="text-xs text-slate-400">Contact candidate profiles based on ATS scores and verified skill badges.</p>
               </div>
-              <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">3 Verified Talent Matches</span>
             </div>
 
-            <div id="recruiter-candidates-list" class="space-y-3">
-              <div class="flex items-center justify-between p-4 bg-slate-800/60 rounded-xl border border-slate-700">
+            <div id="recruiter-candidates-list" class="space-y-3"></div>
+          </div>
+        </div>
+
+        <!-- VIEW 9: RECRUITER POST JOBS WORKSPACE -->
+        <div id="recruiter-jobs-view" class="tab-content space-y-6 hidden">
+          <div class="glass-card p-6 rounded-2xl space-y-6 border border-emerald-500/30">
+            <h3 class="text-sm font-bold text-emerald-400">➕ Create New Job Listing</h3>
+            
+            <form onsubmit="createNewJobListing(event)" class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <p class="text-xs font-bold text-white">Prince Singh <span class="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 text-[10px] ml-2">Full-Stack AI</span></p>
-                  <p class="text-[10px] text-slate-400">Skills: HTML, CSS, JavaScript, React, Node.js, Supabase, PostgreSQL</p>
+                  <label class="block text-xs text-slate-300 mb-1">Job Title</label>
+                  <input type="text" id="job-title-input" required placeholder="e.g. Senior Full-Stack Engineer" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white outline-none">
                 </div>
-                <div class="flex items-center gap-3">
-                  <span class="text-xs font-extrabold text-emerald-400">92% Match</span>
-                  <button onclick="executeBroadcastToastNotification('Sent 1-Click Interview Invite to Prince Singh!')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg">Invite Interview</button>
+                <div>
+                  <label class="block text-xs text-slate-300 mb-1">Company Name</label>
+                  <input type="text" id="job-company-input" required placeholder="e.g. SkillForge AI Inc." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs text-slate-300 mb-1">Salary Range</label>
+                  <input type="text" id="job-salary-input" required placeholder="e.g. $100,000 - $130,000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-xs text-white outline-none">
                 </div>
               </div>
+
+              <button type="submit" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold shadow-md cursor-pointer">
+                Post Job Opening →
+              </button>
+            </form>
+
+            <div class="pt-4 border-t border-slate-800 space-y-3">
+              <h4 class="text-xs font-bold text-white">Your Posted Active Jobs</h4>
+              <div id="recruiter-posted-jobs-list" class="space-y-2"></div>
             </div>
           </div>
         </div>
