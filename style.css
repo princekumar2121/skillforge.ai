@@ -13,11 +13,7 @@
   border-radius: 9999px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
-}
-
-/* Glassmorphism Panels */
+/* Glassmorphic Panels */
 .glass-card {
   background: rgba(19, 29, 49, 0.85);
   backdrop-filter: blur(16px);
@@ -25,11 +21,21 @@
   border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
-.glow-accent {
-  box-shadow: 0 0 30px -5px rgba(99, 102, 241, 0.3);
+/* Animations */
+.hero-logo-bounce {
+  animation: heroBounce 3s infinite ease-in-out;
 }
 
-/* Button & Nav Item Transitions */
-.role-btn, .nav-item {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+@keyframes heroBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.05); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 4s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 0.7; transform: scale(1.2); }
 }
