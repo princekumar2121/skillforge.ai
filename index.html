@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkillForge AI - Autonomous Career & Hiring Engine</title>
   
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -20,18 +21,17 @@
     }
   </script>
 
-  <!-- PDF.js library for PDF parsing -->
+  <!-- PDF.js library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="h-full flex overflow-hidden antialiased font-sans bg-slate-900">
 
-  <!-- Toast System -->
+  <!-- System Toast Notification -->
   <div id="toastBroadcastSystem" class="fixed top-5 right-5 z-50 hidden glass-card border border-indigo-500/40 p-4 rounded-2xl shadow-2xl text-xs text-indigo-200 max-w-sm"></div>
 
-  <!-- ==================== 1. LANDING SPLASH ANIMATION ==================== -->
+  <!-- ==================== 1. LANDING HERO ==================== -->
   <div id="landing-hero" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950 p-6 overflow-hidden transition-opacity duration-700">
-    <!-- Animated background particles -->
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-900/30 via-slate-950 to-slate-950"></div>
     <div class="pulse-glow absolute h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl"></div>
 
@@ -43,7 +43,7 @@
       </h1>
       
       <p class="text-sm md:text-base text-slate-400 font-medium leading-relaxed">
-        Autonomous AI Career Acceleration, 50+ Career Roadmaps & Real-Time Hiring Intelligence.
+        Autonomous AI Career Acceleration, 50+ Detailed Roadmaps, Working Voice Mock Interviews & Role-Based Portals.
       </p>
 
       <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -51,7 +51,7 @@
           Launch Portal / Sign In →
         </button>
         <button type="button" onclick="enterApp('demo')" class="w-full sm:w-auto px-8 py-4 bg-slate-800 hover:bg-slate-700 transition-all text-xs font-extrabold uppercase tracking-wider text-slate-300 rounded-2xl border border-slate-700 cursor-pointer">
-          Explore Demo Mode
+          Explore Guest Demo Mode
         </button>
       </div>
     </div>
@@ -77,7 +77,7 @@
         </div>
       </div>
 
-      <!-- Google Social Login -->
+      <!-- Social Login -->
       <button type="button" onclick="loginWithGoogle()" class="w-full flex items-center justify-center gap-3 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 text-xs font-semibold text-slate-200 transition-all cursor-pointer">
         <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
         Continue with Google
@@ -124,20 +124,28 @@
         </div>
         
         <nav class="p-4 space-y-1 text-xs">
-          <button type="button" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-indigo-400 bg-indigo-500/10 border border-indigo-500/20" onclick="switchTab('dashboard-view', 'Dashboard Overview', this)">
+          <button type="button" id="nav-btn-dashboard" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-indigo-400 bg-indigo-500/10 border border-indigo-500/20" onclick="switchTab('dashboard-view', 'Dashboard Overview', this)">
             <span>📊</span> Dashboard
           </button>
-          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('roadmaps-hub-view', '50+ Career Roadmaps Hub', this)">
+          <button type="button" id="nav-btn-roadmaps" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('roadmaps-hub-view', '50+ Career Roadmaps Hub', this)">
             <span>🗺️</span> 50+ Career Hub
           </button>
-          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('job-board-view', 'Real-Time Job Match Engine', this)">
+          <button type="button" id="nav-btn-jobs" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('job-board-view', 'Real-Time Job Match Engine', this)">
             <span>💼</span> Real-Time Job Match
           </button>
-          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('resume-view', 'ATS PDF Resume Analyzer', this)">
+          <button type="button" id="nav-btn-resume" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('resume-view', 'ATS PDF Resume Analyzer', this)">
             <span>📄</span> PDF Resume Analyzer
           </button>
-          <button type="button" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('interview-view', 'AI Voice Mock Interview', this)">
+          <button type="button" id="nav-btn-interview" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-slate-800" onclick="switchTab('interview-view', 'AI Voice Mock Interview', this)">
             <span>🎙️</span> AI Mock Interview
+          </button>
+          
+          <!-- Role Specific Navigation Buttons -->
+          <button type="button" id="nav-btn-educator" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20 hidden" onclick="switchTab('educator-view', 'Educator Class Analytics', this)">
+            <span>🎓</span> Class Analytics
+          </button>
+          <button type="button" id="nav-btn-recruiter" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 hidden" onclick="switchTab('recruiter-view', 'Recruiter Talent Pipeline', this)">
+            <span>🎯</span> Talent Pipeline
           </button>
         </nav>
       </div>
@@ -171,7 +179,7 @@
       
       <div class="flex-1 overflow-y-auto p-8 space-y-6">
 
-        <!-- DASHBOARD VIEW -->
+        <!-- VIEW 1: DASHBOARD OVERVIEW -->
         <div id="dashboard-view" class="tab-content space-y-6">
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="glass-card p-5 rounded-2xl space-y-1">
@@ -193,33 +201,60 @@
           </div>
 
           <div class="glass-card p-6 rounded-2xl border border-indigo-500/30 space-y-2">
-            <h3 class="text-sm font-bold text-white">⚡ Explore Autonomous Features</h3>
+            <h3 class="text-sm font-bold text-white">⚡ Welcome to SkillForge AI Portal</h3>
             <p class="text-xs text-slate-300 leading-relaxed">
-              Upload PDF resumes, browse 50+ career paths, or view real-time job openings tailored to your skill profile.
+              You are logged in as <span id="dashboard-role-text" class="text-indigo-400 font-semibold">Student</span>. Use the sidebar to explore 50+ Career Roadmaps, practice live Voice Interviews, analyze PDF Resumes, or search matched jobs.
             </p>
           </div>
         </div>
 
-        <!-- 50+ CAREER ROADMAPS HUB -->
+        <!-- VIEW 2: 50+ CAREER ROADMAPS HUB -->
         <div id="roadmaps-hub-view" class="tab-content space-y-6 hidden">
-          <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
-            <div>
-              <h3 class="text-sm font-bold text-white">50+ Career Development Roadmaps</h3>
-              <p class="text-xs text-slate-400">Explore interactive learning modules for top industry roles.</p>
+          
+          <!-- HUB MAIN LIST -->
+          <div id="roadmap-hub-main" class="space-y-6">
+            <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+              <div>
+                <h3 class="text-sm font-bold text-white">50+ Career Development Roadmaps</h3>
+                <p class="text-xs text-slate-400">Select any career to reveal full step-by-step milestones, modules, and learning paths.</p>
+              </div>
+              <input type="text" id="roadmap-search-input" onkeyup="filterRoadmaps()" placeholder="Search 50+ careers (e.g. AI, Cloud, DevOps, Blockchain...)" class="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white outline-none w-full md:w-80">
             </div>
-            <input type="text" id="roadmap-search-input" onkeyup="filterRoadmaps()" placeholder="Search 50+ careers (e.g. AI, Cloud, Devops...)" class="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white outline-none w-full md:w-80">
+
+            <div id="roadmaps-grid-container" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
           </div>
 
-          <div id="roadmaps-grid-container" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+          <!-- DETAILED ROADMAP OVERLAY VIEW -->
+          <div id="roadmap-detailed-overlay" class="space-y-6 hidden">
+            <button type="button" onclick="closeDetailedRoadmap()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold flex items-center gap-2 cursor-pointer">
+              ← Back to All 50 Careers
+            </button>
+
+            <div class="glass-card p-6 rounded-2xl space-y-6 border border-indigo-500/30">
+              <div class="flex flex-col md:flex-row justify-between md:items-center border-b border-slate-800 pb-4 gap-2">
+                <div>
+                  <span id="detailed-roadmap-category" class="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Category</span>
+                  <h2 id="detailed-roadmap-title" class="text-lg font-extrabold text-white mt-1">Career Title</h2>
+                </div>
+                <div class="text-xs text-slate-400">
+                  <span>Estimated Completion: </span><strong id="detailed-roadmap-time" class="text-emerald-400">6 Months</strong>
+                </div>
+              </div>
+
+              <!-- Roadmap Phases Breakdown -->
+              <div id="detailed-roadmap-phases" class="space-y-6"></div>
+            </div>
+          </div>
+
         </div>
 
-        <!-- REAL-TIME JOB MATCH ENGINE -->
+        <!-- VIEW 3: REAL-TIME JOB MATCH ENGINE -->
         <div id="job-board-view" class="tab-content space-y-6 hidden">
           <div class="glass-card p-6 rounded-2xl space-y-4">
             <div class="flex justify-between items-center">
               <div>
                 <h3 class="text-sm font-bold text-white">Real-Time Job Match Engine</h3>
-                <p class="text-xs text-slate-400">Positions filtered based on your ATS resume score and skill roadmaps.</p>
+                <p class="text-xs text-slate-400">Positions dynamically scored based on your selected target requirements and ATS analysis.</p>
               </div>
               <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">12 Direct Matches</span>
             </div>
@@ -228,31 +263,46 @@
           </div>
         </div>
 
-        <!-- PDF RESUME ANALYZER -->
+        <!-- VIEW 4: ATS PDF RESUME ANALYZER (MULTI-SELECT REQUIREMENTS) -->
         <div id="resume-view" class="tab-content space-y-6 hidden">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
             <div class="glass-card p-6 rounded-2xl space-y-4">
-              <h3 class="text-sm font-bold text-white">📄 PDF Resume Upload & Parser</h3>
+              <h3 class="text-sm font-bold text-white">📄 PDF Resume Drag & Drop Upload</h3>
               
-              <div id="drop-zone" onclick="document.getElementById('pdf-file-input').click()" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-2xl p-8 text-center cursor-pointer transition-all bg-slate-800/40">
+              <div id="drop-zone" onclick="document.getElementById('pdf-file-input').click()" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-2xl p-6 text-center cursor-pointer transition-all bg-slate-800/40">
                 <div class="text-3xl mb-2">📁</div>
-                <p class="text-xs font-semibold text-white">Click or drag & drop PDF resume file</p>
-                <p class="text-[10px] text-slate-400 mt-1">Supports standard PDF text formats</p>
+                <p class="text-xs font-semibold text-white">Click or Drag & Drop PDF Resume File</p>
+                <p class="text-[10px] text-slate-400 mt-1">Extracts raw text automatically for ATS matching</p>
                 <input type="file" id="pdf-file-input" accept=".pdf" onchange="handlePDFUpload(event)" class="hidden">
               </div>
 
+              <!-- REAL MULTI-SELECT TARGET JOB REQUIREMENTS -->
               <div>
-                <label class="block text-xs font-medium text-slate-400 mb-1">Target Job Requirements</label>
-                <input type="text" id="target-job-title" value="Full-Stack Developer (HTML, CSS, JavaScript, React, Node.js, Python, PostgreSQL, Supabase, Git)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white outline-none">
+                <label class="block text-xs font-semibold text-slate-300 mb-2">Select Target Job Skill Requirements (Multi-Select):</label>
+                <div id="multi-skill-selector" class="grid grid-cols-3 gap-2 p-3 bg-slate-800/80 rounded-xl border border-slate-700 max-h-36 overflow-y-auto">
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="html" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> HTML5</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="css" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> CSS3</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="javascript" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> JavaScript</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="react" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> React.js</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="node.js" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> Node.js</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="python" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> Python</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="postgresql" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> PostgreSQL</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="supabase" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> Supabase</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="git" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> Git</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="tailwind" checked onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> Tailwind CSS</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="docker" onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> Docker</label>
+                  <label class="flex items-center gap-2 text-[11px] text-slate-300 cursor-pointer"><input type="checkbox" value="aws" onchange="analyzeResume()" class="skill-req-check accent-indigo-500"> AWS Cloud</label>
+                </div>
               </div>
 
               <div>
-                <label class="block text-xs font-medium text-slate-400 mb-1">Extracted Text Content</label>
-                <textarea id="resume-text-input" rows="5" placeholder="PDF text will automatically extract here..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white outline-none font-mono"></textarea>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Parsed Resume Content</label>
+                <textarea id="resume-text-input" rows="4" placeholder="Upload PDF or type text here..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white outline-none font-mono"></textarea>
               </div>
 
               <button type="button" onclick="analyzeResume()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 font-semibold text-xs text-white rounded-xl shadow-lg cursor-pointer">
-                Run ATS Resume Analysis ⚡
+                Run ATS Match Calculation ⚡
               </button>
             </div>
 
@@ -260,36 +310,129 @@
             <div class="glass-card p-6 rounded-2xl space-y-4">
               <h3 class="text-sm font-bold text-white">📊 ATS Analysis Score</h3>
               <div id="ats-results-placeholder" class="text-center py-12 text-slate-500 text-xs">
-                Upload a PDF file or paste text to compute your match percentage.
+                Upload a PDF file or check target requirements to compute match score.
               </div>
               <div id="ats-results-content" class="space-y-4 hidden">
                 <div class="flex items-center justify-between p-4 bg-slate-800/80 rounded-xl border border-slate-700">
-                  <span class="text-xs text-slate-300">Overall Match Score</span>
+                  <span class="text-xs text-slate-300">Selected Requirements Match</span>
                   <span id="ats-score-display" class="text-3xl font-extrabold text-emerald-400">0%</span>
                 </div>
                 <div>
-                  <p class="text-xs font-semibold text-emerald-400 mb-2">✅ Matched Keywords</p>
+                  <p class="text-xs font-semibold text-emerald-400 mb-2">✅ Matched Requirements Found</p>
                   <div id="matched-keywords-container" class="flex flex-wrap gap-1.5"></div>
                 </div>
                 <div>
-                  <p class="text-xs font-semibold text-rose-400 mb-2">⚠️ Missing Skills</p>
+                  <p class="text-xs font-semibold text-rose-400 mb-2">⚠️ Missing Selected Requirements</p>
                   <div id="missing-keywords-container" class="flex flex-wrap gap-1.5"></div>
                 </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- VIEW 5: WORKING AI VOICE MOCK INTERVIEW -->
+        <div id="interview-view" class="tab-content space-y-6 hidden">
+          <div class="glass-card p-6 rounded-2xl space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+              <div>
+                <h3 class="text-sm font-bold text-white">🎙️ Live Voice Speech AI Mock Interviewer</h3>
+                <p class="text-xs text-slate-400">Uses native Speech Recognition to transcribe your voice live and score technical accuracy.</p>
+              </div>
+              <span id="speech-status-indicator" class="px-3 py-1 rounded-full text-[10px] font-bold bg-slate-800 text-slate-400 border border-slate-700">MIC READY</span>
+            </div>
+
+            <div class="p-5 bg-slate-800/80 rounded-2xl border border-slate-700 space-y-2">
+              <p class="text-[10px] font-bold text-indigo-400 uppercase tracking-wider">Question 1: System Architecture & Data Sync</p>
+              <p class="text-xs font-semibold text-white leading-relaxed">
+                "Explain how you handle asynchronous state updates, state persistence, and prevent race conditions in full-stack applications."
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex items-center gap-4">
+                <button type="button" id="voice-record-toggle-btn" onclick="toggleVoiceSpeechRecognition()" class="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 font-semibold text-xs text-white rounded-xl shadow-lg flex items-center gap-2 cursor-pointer transition-all">
+                  <span id="voice-mic-icon">🎙️</span>
+                  <span id="voice-btn-text">Start Voice Answer Recording</span>
+                </button>
+                <div id="audio-wave-anim" class="hidden flex items-center gap-1 h-6">
+                  <span class="w-1 h-full bg-indigo-500 animate-bounce"></span>
+                  <span class="w-1 h-3/4 bg-purple-500 animate-bounce delay-75"></span>
+                  <span class="w-1 h-1/2 bg-pink-500 animate-bounce delay-150"></span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Live Transcribed Speech Answer</label>
+                <textarea id="voice-transcript-output" rows="4" placeholder="Click 'Start Voice Answer Recording' and speak into your microphone..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white outline-none font-sans"></textarea>
+              </div>
+
+              <button type="button" onclick="evaluateSpeechAnswer()" class="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 font-semibold text-xs text-white rounded-xl shadow-lg cursor-pointer">
+                Evaluate Answer with AI ⚡
+              </button>
+            </div>
+
+            <div id="speech-eval-results" class="p-5 bg-slate-800/90 rounded-2xl border border-indigo-500/30 space-y-3 hidden">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-white">AI Response Evaluation</span>
+                <span id="speech-score-tag" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">90 / 100</span>
+              </div>
+              <p id="speech-eval-feedback" class="text-xs text-slate-300 leading-relaxed"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 6: REAL WORKING EDUCATOR PORTAL VIEW -->
+        <div id="educator-view" class="tab-content space-y-6 hidden">
+          <div class="glass-card p-6 rounded-2xl space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+              <div>
+                <h3 class="text-sm font-bold text-amber-400 flex items-center gap-2"><span>🎓</span> Educator Management Portal</h3>
+                <p class="text-xs text-slate-400">Monitor student progress, assigned skill roadmaps, and average ATS readiness.</p>
+              </div>
+              <button onclick="executeBroadcastToastNotification('Broadcasting assignment to all students!')" class="px-3 py-1.5 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-xl text-xs font-semibold hover:bg-amber-500/20">Assign Module Batch</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1">
+                <p class="text-[10px] text-slate-400 uppercase font-bold">Total Enrolled Students</p>
+                <p class="text-xl font-black text-white">42 Active</p>
+              </div>
+              <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1">
+                <p class="text-[10px] text-slate-400 uppercase font-bold">Class Average Readiness</p>
+                <p class="text-xl font-black text-emerald-400">81.4%</p>
+              </div>
+              <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1">
+                <p class="text-[10px] text-slate-400 uppercase font-bold">Mock Interviews Completed</p>
+                <p class="text-xl font-black text-indigo-400">128 Voice Tests</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- AI MOCK INTERVIEW -->
-        <div id="interview-view" class="tab-content space-y-6 hidden">
+        <!-- VIEW 7: REAL WORKING RECRUITER PORTAL VIEW -->
+        <div id="recruiter-view" class="tab-content space-y-6 hidden">
           <div class="glass-card p-6 rounded-2xl space-y-6">
-            <h3 class="text-sm font-bold text-white">🎙️ AI Technical Voice Interview</h3>
-            <div class="p-4 bg-slate-800 rounded-xl text-xs text-slate-200">
-              "How do you handle atomic transactions and prevent race conditions in PostgreSQL?"
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+              <div>
+                <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2"><span>🎯</span> Recruiter Candidate Pipeline</h3>
+                <p class="text-xs text-slate-400">Directly contact candidates with high ATS resume scores and verified skill badges.</p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">3 Verified Talent Matches</span>
             </div>
-            <button type="button" onclick="executeBroadcastToastNotification('🎙️ Interview simulator voice recording module active.')" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold">
-              Start Voice Response
-            </button>
+
+            <div id="recruiter-candidates-list" class="space-y-3">
+              <div class="flex items-center justify-between p-4 bg-slate-800/60 rounded-xl border border-slate-700">
+                <div>
+                  <p class="text-xs font-bold text-white">Prince Singh <span class="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 text-[10px] ml-2">Full-Stack AI</span></p>
+                  <p class="text-[10px] text-slate-400">Skills: HTML, CSS, JavaScript, React, Node.js, Supabase, PostgreSQL</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-extrabold text-emerald-400">92% Match</span>
+                  <button onclick="executeBroadcastToastNotification('Sent 1-Click Interview Invite to Prince Singh!')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg">Invite Interview</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
