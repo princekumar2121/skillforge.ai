@@ -1,4 +1,4 @@
-/* Custom Scrollbar */
+/* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -13,7 +13,7 @@
   border-radius: 9999px;
 }
 
-/* Glassmorphism Styling */
+/* Glassmorphism Panels */
 .glass-card {
   background: rgba(19, 29, 49, 0.85);
   backdrop-filter: blur(16px);
