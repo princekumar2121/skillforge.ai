@@ -1,5 +1,5 @@
 // ===================================================================
-// 1. STATE & INITIALIZATION
+// 1. STATE & DATABASES
 // ===================================================================
 const SUPABASE_URL = "https://vgazgftegixbqzoqwegt.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_YdfM6Ft3oYHCgpRxn1kjWA_PQCCFqpD";
@@ -14,7 +14,23 @@ let activeMode = 'login';
 let speechRecognitionObj = null;
 let isListeningSpeech = false;
 
-// 50 CAREER ROADMAP DATABASE WITH DETAILED PHASES
+// Dynamic Educator & Recruiter Data
+let EDUCATOR_COURSES = [
+  { id: 1, title: "Full-Stack System Architecture & Supabase", category: "Backend", modules: "Module 1: PostgreSQL Locks, Module 2: REST APIs" }
+];
+
+let LIVE_JOBS_DATABASE = [
+  { id: 101, title: "Full-Stack Web Developer", company: "TechCorp Inc.", salary: "$95,000 - $125,000", match: "94% Match" },
+  { id: 102, title: "AI & Machine Learning Engineer", company: "SkillForge Labs", salary: "$120,000 - $150,000", match: "88% Match" }
+];
+
+const CANDIDATES_PIPELINE = [
+  { name: "Prince Singh", role: "Full-Stack AI", skills: "HTML, CSS, JS, React, Supabase, Postgres", match: "94%" },
+  { name: "Alex Rivera", role: "Backend Engineer", skills: "Python, Docker, Node.js, Postgres", match: "89%" },
+  { name: "Sophia Chen", role: "AI & ML Engineer", skills: "Python, PyTorch, Transformers, Vector DBs", match: "85%" }
+];
+
+// 50 CAREER ROADMAP DATABASE
 const CAREER_ROADMAPS_DATABASE = [
   { 
     id: 1, 
@@ -23,10 +39,9 @@ const CAREER_ROADMAPS_DATABASE = [
     time: "6 Months",
     skills: ["HTML/CSS", "JavaScript", "React", "Node.js", "PostgreSQL"],
     phases: [
-      { name: "Phase 1: Web Foundations", modules: ["HTML5 Semantic Structure", "CSS3 Flexbox & Grid Layouts", "Modern Tailwind CSS"] },
-      { name: "Phase 2: Client Side Development", modules: ["JavaScript ES6+ Syntax & DOM", "React.js Components & State", "REST API Consumption"] },
-      { name: "Phase 3: Backend & Database", modules: ["Node.js & Express Architecture", "PostgreSQL & Supabase Setup", "Row-Level Security & Auth"] },
-      { name: "Phase 4: Deployment & System Design", modules: ["Git & GitHub Actions CI/CD", "Vercel / Cloud Deployment", "Performance Optimization"] }
+      { name: "Phase 1: Foundations", modules: ["HTML5 & CSS3 Flexbox/Grid", "Modern Tailwind UI"] },
+      { name: "Phase 2: Client Side", modules: ["JavaScript ES6+ Syntax", "React State & Hooks"] },
+      { name: "Phase 3: Backend & Database", modules: ["Node.js Express APIs", "PostgreSQL & Supabase Auth"] }
     ]
   },
   { 
@@ -36,50 +51,13 @@ const CAREER_ROADMAPS_DATABASE = [
     time: "8 Months",
     skills: ["Python", "PyTorch", "TensorFlow", "NLP", "Vector DBs"],
     phases: [
-      { name: "Phase 1: Math & Python Foundations", modules: ["Linear Algebra & Calculus", "NumPy & Pandas Data Analysis", "Advanced Python"] },
-      { name: "Phase 2: Classical Machine Learning", modules: ["Scikit-Learn Algorithms", "Regression & Classification", "Model Evaluation Metrics"] },
-      { name: "Phase 3: Deep Learning & Neural Nets", modules: ["PyTorch Framework Basics", "Convolutional & Recurrent Nets", "Transformer Architecture"] },
-      { name: "Phase 4: Generative AI & MLOps", modules: ["LLMs & HuggingFace Models", "Vector Databases (Pinecone/Chroma)", "Model Deployment"] }
-    ]
-  },
-  { 
-    id: 3, 
-    title: "Cloud Solutions Architect", 
-    category: "Cloud", 
-    time: "7 Months",
-    skills: ["AWS", "Docker", "Kubernetes", "Terraform", "CI/CD"],
-    phases: [
-      { name: "Phase 1: Networking & Linux", modules: ["Linux Shell Scripting", "TCP/IP & Subnetting", "Virtual Machines"] },
-      { name: "Phase 2: Cloud Computing (AWS)", modules: ["EC2, S3, IAM & VPC Security", "Lambda Serverless Functions", "CloudWatch Monitoring"] },
-      { name: "Phase 3: Containerization & IaC", modules: ["Docker Containers", "Kubernetes Cluster Management", "Terraform Automation"] }
-    ]
-  },
-  { 
-    id: 4, 
-    title: "Cybersecurity Analyst", 
-    category: "Security", 
-    time: "6 Months",
-    skills: ["Network Security", "Ethical Hacking", "SIEM", "Python", "Linux"],
-    phases: [
-      { name: "Phase 1: Security Fundamentals", modules: ["CompTIA Security+ Core Concepts", "Wireshark Packet Analysis", "Firewall Configuration"] },
-      { name: "Phase 2: Penetration Testing", modules: ["Metasploit & Nmap Scanning", "OWASP Top 10 Web Vulnerabilities", "Python Security Scripts"] }
-    ]
-  },
-  { 
-    id: 5, 
-    title: "Data Scientist", 
-    category: "Data", 
-    time: "6 Months",
-    skills: ["Python", "Pandas", "SQL", "Statistics", "Data Visualization"],
-    phases: [
-      { name: "Phase 1: Data Analytics", modules: ["Advanced SQL Queries", "Pandas Data Wrangling", "Matplotlib & Seaborn"] },
-      { name: "Phase 2: Statistical Modeling", modules: ["Hypothesis Testing", "Predictive Analytics", "A/B Testing Methodology"] }
+      { name: "Phase 1: Math & Python", modules: ["Linear Algebra", "Pandas Data Analysis"] },
+      { name: "Phase 2: Neural Nets", modules: ["PyTorch Basics", "Transformer Architectures"] }
     ]
   }
 ];
 
-// Populate up to 50 career paths
-for (let i = 6; i <= 50; i++) {
+for (let i = 3; i <= 50; i++) {
   CAREER_ROADMAPS_DATABASE.push({
     id: i,
     title: `Specialized Track ${i}: Tech Domain Role`,
@@ -88,19 +66,12 @@ for (let i = 6; i <= 50; i++) {
     skills: ["Core Logic", "Architecture", "Database", "Security"],
     phases: [
       { name: "Phase 1: Core Fundamentals", modules: ["Domain Logic", "Tooling Setup"] },
-      { name: "Phase 2: Advanced Implementation", modules: ["Scalability Testing", "Production Deployment"] }
+      { name: "Phase 2: Production Deployment", modules: ["Scalability Testing", "Cloud Setup"] }
     ]
   });
 }
 
-// REAL-TIME JOBS DATABASE
-const LIVE_JOBS_DATABASE = [
-  { id: 101, title: "Full-Stack Web Developer", company: "TechCorp Inc.", salary: "$95,000 - $125,000", match: "94% Match" },
-  { id: 102, title: "AI & Machine Learning Engineer", company: "SkillForge Labs", salary: "$120,000 - $150,000", match: "88% Match" },
-  { id: 103, title: "Junior Python & Backend Engineer", company: "DataSync Systems", salary: "$80,000 - $100,000", match: "82% Match" }
-];
-
-// TOAST SYSTEM
+// TOAST NOTIFIER
 function executeBroadcastToastNotification(msg) {
   const toast = document.getElementById('toastBroadcastSystem');
   if (toast) {
@@ -125,7 +96,7 @@ function enterApp(mode) {
   }, 500);
 }
 
-// AUTH HANDLERS
+// ROLE SELECTION & AUTH
 function selectRole(role) {
   activeRole = role;
   ['student', 'educator', 'recruiter'].forEach(r => {
@@ -166,6 +137,7 @@ function loginWithGoogle() {
   openDashboard("Google User", activeRole);
 }
 
+// OPEN DASHBOARD & LOAD ROLE SPECIFIC VIEWS
 function openDashboard(userName, role) {
   const nameEl = document.getElementById('user-display-name');
   if (nameEl) nameEl.innerText = userName;
@@ -179,12 +151,25 @@ function openDashboard(userName, role) {
   const dashRole = document.getElementById('dashboard-role-text');
   if (dashRole) dashRole.innerText = role.charAt(0).toUpperCase() + role.slice(1);
 
-  // Toggle Role Specific Nav Items
-  const educatorNav = document.getElementById('nav-btn-educator');
-  const recruiterNav = document.getElementById('nav-btn-recruiter');
+  // Toggle Nav Groups
+  const navStudent = document.getElementById('nav-group-student');
+  const navEducator = document.getElementById('nav-group-educator');
+  const navRecruiter = document.getElementById('nav-group-recruiter');
 
-  if (role === 'educator' && educatorNav) educatorNav.classList.remove('hidden');
-  if (role === 'recruiter' && recruiterNav) recruiterNav.classList.remove('hidden');
+  if (navStudent) navStudent.classList.add('hidden');
+  if (navEducator) navEducator.classList.add('hidden');
+  if (navRecruiter) navRecruiter.classList.add('hidden');
+
+  if (role === 'educator' && navEducator) {
+    navEducator.classList.remove('hidden');
+    switchTab('educator-view', 'Educator Class Analytics', null);
+  } else if (role === 'recruiter' && navRecruiter) {
+    navRecruiter.classList.remove('hidden');
+    switchTab('recruiter-view', 'Recruiter Talent Pipeline', null);
+  } else if (navStudent) {
+    navStudent.classList.remove('hidden');
+    switchTab('dashboard-view', 'Student Dashboard', null);
+  }
 
   const authPage = document.getElementById('auth-page');
   if (authPage) authPage.classList.add('hidden');
@@ -194,6 +179,9 @@ function openDashboard(userName, role) {
 
   renderRoadmapsHub();
   renderLiveJobs();
+  renderEducatorCourses();
+  renderRecruiterPipeline();
+  renderRecruiterPostedJobs();
 }
 
 function handleLogout() {
@@ -207,7 +195,7 @@ function handleLogout() {
   }
 }
 
-// TAB SWITCHING
+// TAB NAVIGATION
 function switchTab(viewId, title, element) {
   document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
   const target = document.getElementById(viewId);
@@ -221,7 +209,92 @@ function switchTab(viewId, title, element) {
 }
 
 // ===================================================================
-// 2. 50 CAREER ROADMAPS HUB & FULL ROADMAP OVERLAY
+// 2. EDUCATOR ACTIONS
+// ===================================================================
+function createNewCourse(e) {
+  e.preventDefault();
+  const title = document.getElementById('course-title-input').value;
+  const category = document.getElementById('course-category-input').value;
+  const modules = document.getElementById('course-modules-input').value;
+
+  EDUCATOR_COURSES.push({ id: Date.now(), title, category, modules });
+  renderEducatorCourses();
+  executeBroadcastToastNotification(`Published course: ${title}!`);
+
+  document.getElementById('course-title-input').value = "";
+  document.getElementById('course-category-input').value = "";
+  document.getElementById('course-modules-input').value = "";
+}
+
+function renderEducatorCourses() {
+  const container = document.getElementById('educator-course-list');
+  if (!container) return;
+
+  container.innerHTML = EDUCATOR_COURSES.map(c => `
+    <div class="p-3 bg-slate-800/80 rounded-xl border border-slate-700 flex justify-between items-center">
+      <div>
+        <p class="text-xs font-bold text-white">${c.title} <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 text-[10px] ml-2">${c.category}</span></p>
+        <p class="text-[10px] text-slate-400 mt-0.5">${c.modules}</p>
+      </div>
+      <button onclick="executeBroadcastToastNotification('Broadcasting course updates to students!')" class="px-3 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-[10px]">Notify Class</button>
+    </div>
+  `).join('');
+}
+
+// ===================================================================
+// 3. RECRUITER ACTIONS
+// ===================================================================
+function createNewJobListing(e) {
+  e.preventDefault();
+  const title = document.getElementById('job-title-input').value;
+  const company = document.getElementById('job-company-input').value;
+  const salary = document.getElementById('job-salary-input').value;
+
+  LIVE_JOBS_DATABASE.push({ id: Date.now(), title, company, salary, match: "Direct Match" });
+  renderLiveJobs();
+  renderRecruiterPostedJobs();
+  executeBroadcastToastNotification(`Published job: ${title} at ${company}!`);
+
+  document.getElementById('job-title-input').value = "";
+  document.getElementById('job-company-input').value = "";
+  document.getElementById('job-salary-input').value = "";
+}
+
+function renderRecruiterPipeline() {
+  const container = document.getElementById('recruiter-candidates-list');
+  if (!container) return;
+
+  container.innerHTML = CANDIDATES_PIPELINE.map(c => `
+    <div class="flex items-center justify-between p-4 bg-slate-800/60 rounded-xl border border-slate-700">
+      <div>
+        <p class="text-xs font-bold text-white">${c.name} <span class="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 text-[10px] ml-2">${c.role}</span></p>
+        <p class="text-[10px] text-slate-400 mt-0.5">Skills: ${c.skills}</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-extrabold text-emerald-400">${c.match} Match</span>
+        <button onclick="executeBroadcastToastNotification('Sent 1-Click Interview Invite to ${c.name}!')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg">Invite Interview</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderRecruiterPostedJobs() {
+  const container = document.getElementById('recruiter-posted-jobs-list');
+  if (!container) return;
+
+  container.innerHTML = LIVE_JOBS_DATABASE.map(j => `
+    <div class="p-3 bg-slate-800/80 rounded-xl border border-slate-700 flex justify-between items-center">
+      <div>
+        <p class="text-xs font-bold text-white">${j.title} <span class="text-slate-400 font-normal">at ${j.company}</span></p>
+        <p class="text-[10px] text-emerald-400">${j.salary}</p>
+      </div>
+      <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 rounded-full text-[10px] font-bold">Active Listing</span>
+    </div>
+  `).join('');
+}
+
+// ===================================================================
+// 4. ROADMAPS & STUDENT FEATURES
 // ===================================================================
 function renderRoadmapsHub() {
   const container = document.getElementById('roadmaps-grid-container');
@@ -271,7 +344,7 @@ function openDetailedRoadmap(careerId) {
   document.getElementById('detailed-roadmap-time').innerText = career.time;
 
   const phasesContainer = document.getElementById('detailed-roadmap-phases');
-  phasesContainer.innerHTML = career.phases.map((phase, idx) => `
+  phasesContainer.innerHTML = career.phases.map((phase) => `
     <div class="p-4 bg-slate-800/60 rounded-xl border border-slate-700 space-y-3">
       <h4 class="text-xs font-bold text-indigo-400">${phase.name}</h4>
       <div class="space-y-2">
@@ -292,7 +365,7 @@ function closeDetailedRoadmap() {
 }
 
 // ===================================================================
-// 3. REAL-TIME JOB MATCHES
+// 5. REAL-TIME JOB MATCHES & RESUME PARSER
 // ===================================================================
 function renderLiveJobs() {
   const container = document.getElementById('jobs-container-list');
@@ -312,9 +385,6 @@ function renderLiveJobs() {
   `).join('');
 }
 
-// ===================================================================
-// 4. PDF PARSER & MULTI-SELECT ATS RESUME ANALYZER
-// ===================================================================
 async function handlePDFUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -352,7 +422,7 @@ function analyzeResume() {
   checkboxes.forEach(box => selectedKeywords.push(box.value));
 
   if (selectedKeywords.length === 0) {
-    executeBroadcastToastNotification("Select at least 1 job requirement skill.");
+    executeBroadcastToastNotification("Select at least 1 skill requirement.");
     return;
   }
 
@@ -380,7 +450,7 @@ function analyzeResume() {
 }
 
 // ===================================================================
-// 5. WORKING SPEECH-TO-TEXT AI VOICE MOCK INTERVIEW
+// 6. VOICE SPEECH RECOGNITION INTERVIEW
 // ===================================================================
 function toggleVoiceSpeechRecognition() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
